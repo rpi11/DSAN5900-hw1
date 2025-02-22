@@ -1,0 +1,5 @@
+Data Science Questions:
+
+* Influence of volunteering versus work experience
+* Gender bias
+* Based on the list of admitted and declined students, who off the waitlist should we admit?
