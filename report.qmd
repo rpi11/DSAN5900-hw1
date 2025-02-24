@@ -1,5 +1,48 @@
-Data Science Questions:
+# Selecting Which Students to Admit From the Waitlist
+## DSAN 5900 Homework 1 Report
+Authors: Bozhi Hao, Rich Pihlstrom, Yicheng Zhu
 
-* Influence of volunteering versus work experience
-* Gender bias
-* Based on the list of admitted and declined students, who off the waitlist should we admit?
+## The Problem
+
+With the Spring semester having kicked off recently, we were pleased to hear that the Admissions Committee produced a list of decisions for Fall 2025 matriculation much earlier than previously anticipated. The efficiency of the Admissions Committee, alongside the thorough organization of applicant data, has allowed our team to tackle a persistent challenge: choosing which students to admit off of the waitlist.
+
+In this report, we propose a efficient, data-driven process for not only identifying which waitlisted students to admit, but also which of the recorded metrics play the biggest role in our admissions process.
+
+## Our Solution
+
+Our solution centers on the simple machine-learning process of [logistic regression](https://datatab.net/tutorial/logistic-regression). This process uses a handful of data features (GPA, WorkExp, TestScore, WritingScore, Gender, VolunteerLevel), as well as our admission decisions (admitted, declined) and learns to model our decision-making process based on the data features. We then apply this learned-process to the waitlisted candidates to make our decision. This method is strictly based on the decisions we have already made and the data that we already have collected.
+
+## Data Processing
+
+We follow a standard process of data cleaning, exploratory analysis, and model fitting:
+
+### Cleaning
+
+In cleaning our data, we sought to ensure the following tenets:
+
+1. Complete rows of data
+2. Categorical entries that conform to labeling conventions
+3. Numeric entries that are not too far outlying
+
+Given these rules, we opted to simply remove rows which did not meet these criteria. We did not want poorly stored data to corrupt our classification model.
+
+First, there were a handful of rows which had missing values, which we removed.
+
+Second, our categorical columns had entries that did not fit expected labels (e.g. Gender == -1 is not a valid entry). We removed these rows.
+
+Finally, our numeric columns had some entries which were technically valid, but fell far outside of an expected range (e.g. WorkExp == 100 is way to high). We removed these rows as well.
+
+### Exploratory Analysis
+
+### Running Logistic Regression
+
+## Results
+
+Based on the results of our logistic regression, we can admit students 77 and 60 with the confidence that their associated data fits closely with our existing list of admitted and denied students. Additionally, we can assert that the following students, in order, would be the next-most-likely that we should admit from the waitlist: [72,60,65,6673,69,75].
+
+Finally, we can also use our model to draw insight about the relative importance of each feature.
+The plot below depicts the relative importance of each feature in the final decision. The x-value of "importance" is arbitrary in explicit value, instead mattering more in the relative comparison to other features. Larger, positive values suggest greater importance:
+
+![](viz/Logistic%20Result.png)
+
+From this plot, we can conclude that Test Score, Writing Score, and GPA hold the largest influence in a student's chances of admittance. Assuming a desire to ideally have features be considered equally, we would recommend a more nuanced storage collection and storage method for Work Experience and Volunteer Level in order to facilitate holistic consideration of each applicant.
