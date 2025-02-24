@@ -38,7 +38,7 @@ Finally, our numeric columns had some entries which were technically valid, but 
 
 ## Results
 
-Based on the results of our logistic regression, we can admit students 77 and 60 with the confidence that their associated data fits closely with our existing list of admitted and denied students. Additionally, we can assert that the following students, in order, would be the next-most-likely that we should admit from the waitlist: [72,60,65,6673,69,75].
+Based on the results of our logistic regression, we can admit students 77 and 60 with the confidence that their associated data fits closely with our existing list of admitted and denied students. Additionally, we can assert that the following students, in order, would be the next-most-likely that we should admit from the waitlist: [72, 60, 65, 66, 73, 69, 75].
 
 Finally, we can also use our model to draw insight about the relative importance of each feature.
 The plot below depicts the relative importance of each feature in the final decision. The x-value of "importance" is arbitrary in explicit value, instead mattering more in the relative comparison to other features. Larger, positive values suggest greater importance:
