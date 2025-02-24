@@ -1,5 +1,13 @@
+---
+format:
+  html:
+    embed-resources: true
+---
+
 # Selecting Which Students to Admit From the Waitlist
+
 ## DSAN 5900 Homework 1 Report
+
 Authors: Bozhi Hao, Rich Pihlstrom, Yicheng Zhu
 
 ## The Problem
@@ -20,9 +28,9 @@ We follow a standard process of data cleaning, exploratory analysis, and model f
 
 In cleaning our data, we sought to ensure the following tenets:
 
-1. Complete rows of data
-2. Categorical entries that conform to labeling conventions
-3. Numeric entries that are not too far outlying
+1.  Complete rows of data
+2.  Categorical entries that conform to labeling conventions
+3.  Numeric entries that are not too far outlying
 
 Given these rules, we opted to simply remove rows which did not meet these criteria. We did not want poorly stored data to corrupt our classification model.
 
@@ -36,12 +44,44 @@ Finally, our numeric columns had some entries which were technically valid, but 
 
 ### Running Logistic Regression
 
+#### **Data Preprocessing**
+
+We began by cleaning the dataset, specifically removing rows **12** and **18** due to abnormal values in the **WritingScore** column. To ensure consistent scaling of features, we applied **Min-Max Normalization** to both **TestScore** and **WritingScore**. This scaling was crucial to maintain the relative importance of these variables in the model.
+
+The features used for training were:
+
+-   **GPA** (Grade Point Average)
+
+-   **WorkExp** (Work Experience in years)
+
+-   **TestScore** (Standardized Test Score, normalized)
+
+-   **WritingScore** (Writing Score, normalized)
+
+-   **Gender** (Binary variable: 0 or 1)
+
+-   **VolunteerLevel** (Level of volunteer involvement)
+
+#### Model Training
+
+We used a Logistic Regression model to predict student admissions. The target variable was binary:
+	-	1 = Admit
+	-	0 = Decline (combining Waitlist and Reject categories)
+To ensure the model learned from clear examples, we excluded waitlist students from the training process. The dataset was split into 70% training and 30% testing using stratified sampling to maintain class balance.
+
+#### Model Performance
+
+After training the logistic regression model on the cleaned and normalized data, we evaluated its performance using standard classification metrics:
+	- Accuracy: 88.24%
+	- Precision: 90%
+	- Recall: 90%
+	-	F1 Score: 90%
+	
 ## Results
 
-Based on the results of our logistic regression, we can admit students 77 and 60 with the confidence that their associated data fits closely with our existing list of admitted and denied students. Additionally, we can assert that the following students, in order, would be the next-most-likely that we should admit from the waitlist: [72, 60, 65, 66, 73, 69, 75].
+Based on the results of our logistic regression, we can admit students 77 and 60 with the confidence that their associated data fits closely with our existing list of admitted and denied students. Additionally, we can assert that the following students, in order, would be the next-most-likely that we should admit from the waitlist: \[72, 60, 65, 66, 73, 69, 75\].
 
-Finally, we can also use our model to draw insight about the relative importance of each feature.
-The plot below depicts the relative importance of each feature in the final decision. The x-value of "importance" is arbitrary in explicit value, instead mattering more in the relative comparison to other features. Larger, positive values suggest greater importance:
+Finally, we can also use our model to draw insight about the relative importance of each feature. The plot below depicts the relative importance of each feature in the final decision. The x-value of "importance" is arbitrary in explicit value, instead mattering more in the relative comparison to other features. Larger, positive values suggest greater importance:
 
 ![](viz/Logistic%20Result.png)
 
