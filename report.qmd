@@ -42,6 +42,31 @@ Finally, our numeric columns had some entries which were technically valid, but 
 
 ### Exploratory Analysis
 
+#### Dataset Overview
+
+The dataset consists of 80 entries and 8 columns, including both categorical and numeric variables:
+
+-   **Decision**: Admission decision (Admit/Deny)
+-   **State**: Applicant’s state
+-   **GPA**: Grade Point Average (numeric)
+-   **WorkExp**: Work experience (in years)
+-   **TestScore**: Test score (numeric)
+-   **WritingScore**: Writing score (numeric)
+-   **Gender**: Gender of the applicant (0 = Female, 1 = Male)
+-   **VolunteerLevel**: Volunteer activity level (numeric)
+
+![](viz/eda1.png)
+
+![](viz/eda2.png)
+
+Key Insights from Correlation - GPA and Test Score: Moderate positive correlation (0.43). - GPA and Writing Score: Weak positive correlation (0.19). - Work Experience and Test Score: Weak negative correlation (-0.16). - Gender: No significant correlation with other numeric features.
+
+![](viz/eda3.png)
+
+The exploratory data analysis provides insights into the key variables in the admissions dataset. We observe moderate correlations between GPA and Test Score, and weak correlations between GPA and Writing Score. Gender does not appear to have a strong impact on the numeric features. The categorical variables, including the decision and state distributions, offer further avenues for analysis, particularly in relation to geographic patterns.
+
+Future work could involve predictive modeling or further investigation into the factors that influence admission decisions.
+
 ### Running Logistic Regression
 
 #### **Data Preprocessing**
@@ -64,19 +89,12 @@ The features used for training were:
 
 #### Model Training
 
-We used a Logistic Regression model to predict student admissions. The target variable was binary:
-	-	1 = Admit
-	-	0 = Decline (combining Waitlist and Reject categories)
-To ensure the model learned from clear examples, we excluded waitlist students from the training process. The dataset was split into 70% training and 30% testing using stratified sampling to maintain class balance.
+We used a Logistic Regression model to predict student admissions. The target variable was binary: - 1 = Admit - 0 = Decline (combining Waitlist and Reject categories) To ensure the model learned from clear examples, we excluded waitlist students from the training process. The dataset was split into 70% training and 30% testing using stratified sampling to maintain class balance.
 
 #### Model Performance
 
-After training the logistic regression model on the cleaned and normalized data, we evaluated its performance using standard classification metrics:
-	- Accuracy: 88.24%
-	- Precision: 90%
-	- Recall: 90%
-	-	F1 Score: 90%
-	
+After training the logistic regression model on the cleaned and normalized data, we evaluated its performance using standard classification metrics: - Accuracy: 88.24% - Precision: 90% - Recall: 90% - F1 Score: 90%
+
 ## Results
 
 Based on the results of our logistic regression, we can admit students 77 and 60 with the confidence that their associated data fits closely with our existing list of admitted and denied students. Additionally, we can assert that the following students, in order, would be the next-most-likely that we should admit from the waitlist: \[72, 60, 65, 66, 73, 69, 75\].
